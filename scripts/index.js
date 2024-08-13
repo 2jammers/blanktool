@@ -25,10 +25,21 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Function to open the uploaded HTML content in a new window
 function openHtmlInNewWindow(htmlContent) {
-    // Create a Blob from the HTML content
-    const blob = new Blob([htmlContent], { type: 'text/html' });
-    const url = URL.createObjectURL(blob);
+    // Open a new window with about:blank
+    const newWindow = window.open('about:blank', '_blank');
 
-    // Open the Blob URL in a new tab
-    window.open(url, '_blank');
+    // Function to write HTML content to the new window
+    function writeContentToWindow() {
+        if (newWindow) {
+            newWindow.document.open();
+            newWindow.document.write(htmlContent);
+            newWindow.document.close();
+        }
+    }
+
+    // Wait until the new window is fully loaded
+    newWindow.onload = writeContentToWindow;
+
+    // If the onload event doesn't fire, handle it as a fallback
+    setTimeout(writeContentToWindow, 1000);
 }
