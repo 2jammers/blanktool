@@ -1,3 +1,3 @@
-# blanktool
+# webpage tester
 
-Embeds javascript content in an about:blank tab. This is a private website
+Embeds a webpage into a new tab for tests
